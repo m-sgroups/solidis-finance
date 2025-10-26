@@ -45,32 +45,68 @@ export default function Contact() {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simuler l'envoi du formulaire
-    console.log("Form submitted:", formData)
-    
-    // Simulation d'une requête API
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    
-    setSubmitted(true)
-    setIsSubmitting(false)
-    
-    // Réinitialiser le formulaire
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      birthDate: "",
-      birthPlace: "",
-      profession: "",
-      loanAmount: "",
-      repaymentDuration: "",
-      loanPurpose: "",
-      monthlyIncome: "",
-      idDocument: null,
-    })
-    
-    setTimeout(() => setSubmitted(false), 5000)
+    try {
+      // Créer FormData pour envoyer le fichier
+      const data = new FormData()
+      data.append('firstName', formData.firstName)
+      data.append('lastName', formData.lastName)
+      data.append('email', formData.email)
+      data.append('phone', formData.phone)
+      data.append('birthDate', formData.birthDate)
+      data.append('birthPlace', formData.birthPlace)
+      data.append('profession', formData.profession)
+      data.append('monthlyIncome', formData.monthlyIncome)
+      data.append('loanAmount', formData.loanAmount)
+      data.append('repaymentDuration', formData.repaymentDuration)
+      data.append('loanPurpose', formData.loanPurpose)
+      
+      if (formData.idDocument) {
+        data.append('idDocument', formData.idDocument)
+      }
+
+      // Envoyer à l'API
+      const response = await fetch('/api/loan-request', {
+        method: 'POST',
+        body: data,
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        console.log('✅ Formulaire envoyé avec succès!')
+        setSubmitted(true)
+        
+        // Réinitialiser le formulaire
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          birthDate: "",
+          birthPlace: "",
+          profession: "",
+          loanAmount: "",
+          repaymentDuration: "",
+          loanPurpose: "",
+          monthlyIncome: "",
+          idDocument: null,
+        })
+        
+        // Réinitialiser l'input file
+        const fileInput = document.getElementById('idDocument') as HTMLInputElement
+        if (fileInput) fileInput.value = ''
+        
+        setTimeout(() => setSubmitted(false), 5000)
+      } else {
+        console.error('❌ Erreur:', result.error)
+        alert('Erreur: ' + result.error)
+      }
+    } catch (error) {
+      console.error('❌ Erreur réseau:', error)
+      alert('Erreur lors de l\'envoi du formulaire. Vérifiez votre connexion.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (

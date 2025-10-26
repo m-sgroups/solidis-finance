@@ -3,16 +3,19 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
+import { useLanguage } from "@/contexts/LanguageContext"
+import LanguageSelector from "./LanguageSelector"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const { t } = useLanguage()
 
   const navItems = [
-    { label: "Home", href: "/" },
-    { label: "Chi Siamo", href: "/about" },
-    { label: "Servizi", href: "/services" },
-    { label: "Simulazione", href: "/simulation" },
-    { label: "Contatti", href: "/contact" },
+    { label: t('nav.home'), href: "/" },
+    { label: t('nav.about'), href: "/about" },
+    { label: t('nav.services'), href: "/services" },
+    { label: t('nav.simulation'), href: "/simulation" },
+    { label: t('nav.contact'), href: "/contact" },
   ]
 
   return (
@@ -30,7 +33,7 @@ export default function Header() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
               <Link
                 key={item.label}
@@ -40,15 +43,21 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
+            
+            {/* Language Selector - Desktop */}
+            <LanguageSelector />
           </nav>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-white/20 transition-colors"
-          >
-            {isOpen ? <X size={24} className="text-white" /> : <Menu size={24} className="text-white" />}
-          </button>
+          {/* Mobile: Language Selector + Menu button */}
+          <div className="md:hidden flex items-center gap-3">
+            <LanguageSelector />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 rounded-lg hover:bg-white/20 transition-colors"
+            >
+              {isOpen ? <X size={24} className="text-white" /> : <Menu size={24} className="text-white" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}

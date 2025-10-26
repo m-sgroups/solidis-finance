@@ -1,12 +1,15 @@
 "use client"
 
 import { Banknote, Building2, Zap, TrendingUp } from "lucide-react"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 export default function Services() {
+  const { t } = useLanguage()
+
   const services = [
     {
       icon: Banknote,
-      title: "Prestiti Personali",
+      title: t('services.personalLoan'),
       description:
         "Ottieni il finanziamento di cui hai bisogno per i tuoi progetti personali con condizioni flessibili e trasparenti.",
       color: "sapphire",
@@ -14,7 +17,7 @@ export default function Services() {
     },
     {
       icon: Building2,
-      title: "Prestiti Aziendali",
+      title: t('services.businessLoan'),
       description:
         "Sviluppa la tua azienda con le nostre soluzioni di finanziamento adatte alle esigenze dei professionisti.",
       color: "emerald",
@@ -22,14 +25,14 @@ export default function Services() {
     },
     {
       icon: Zap,
-      title: "Credito Rapido",
+      title: t('services.quickLoan'),
       description: "Hai bisogno urgente di liquidità? Ottieni una risposta in 24h con il nostro processo semplificato.",
       color: "coral",
       glowClass: "glow-coral",
     },
     {
       icon: TrendingUp,
-      title: "Consulenza Finanziaria",
+      title: t('services.consolidation'),
       description:
         "I nostri esperti ti consigliano per ottimizzare la tua situazione finanziaria e raggiungere i tuoi obiettivi.",
       color: "gold",
@@ -40,15 +43,13 @@ export default function Services() {
   return (
     <section id="services" className="py-20 md:py-32 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
         <div className="text-center mb-16 fade-in-up">
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 text-3d">I Nostri Servizi</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 text-3d">{t('services.title')}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Solidis Finance offre una gamma completa di soluzioni di finanziamento adatte a tutte le tue esigenze.
+            {t('services.subtitle')}
           </p>
         </div>
 
-        {/* Services grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => {
             const Icon = service.icon

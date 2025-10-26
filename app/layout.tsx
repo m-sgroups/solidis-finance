@@ -4,6 +4,7 @@ import { Playfair_Display, Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Preloader from "@/components/Preloader"
+import { LanguageProvider } from "@/contexts/LanguageContext"
 
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" })
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -25,9 +26,11 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${inter.variable} font-sans antialiased bg-background text-foreground`}
       >
-        <Preloader />
-        {children}
-        <Analytics />
+        <LanguageProvider>
+          <Preloader />
+          {children}
+          <Analytics />
+        </LanguageProvider>
       </body>
     </html>
   )

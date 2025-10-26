@@ -1,13 +1,16 @@
 "use client"
 
 import { CheckCircle } from "lucide-react"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 export default function About() {
+  const { t } = useLanguage()
+
   const values = [
-    "Trasparenza totale nelle nostre condizioni",
-    "Processo rapido e semplificato",
-    "Team di esperti al tuo ascolto",
-    "Soluzioni adatte alle tue esigenze",
+    t('about.values.transparency'),
+    t('about.values.trust'),
+    t('about.values.speed'),
+    t('about.values.support'),
   ]
 
   return (
@@ -17,19 +20,16 @@ export default function About() {
           {/* Left content */}
           <div className="fade-in-up">
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 text-3d">
-              Chi Siamo{" "}
+              {t('about.title')}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-sapphire to-emerald">
                 Solidis Finance
               </span>
             </h2>
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              Solidis Finance è un'agenzia di finanziamento moderna e affidabile, dedicata a offrirti le migliori
-              soluzioni di prestiti. Con anni di esperienza nel settore finanziario, comprendiamo le tue esigenze e ci
-              impegniamo a fornirti un servizio trasparente e di qualità.
+              {t('about.description')}
             </p>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              La nostra missione è semplice: accompagnarti nei tuoi progetti offrendoti condizioni giuste, processi
-              rapidi e un team sempre disponibile per consigliarti.
+              {t('about.mission')}
             </p>
 
             {/* Values list */}

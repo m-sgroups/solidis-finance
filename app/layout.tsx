@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Playfair_Display, Inter } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
+import { GoogleAnalytics } from '@next/third-parties/google'
 import "./globals.css"
 import Preloader from "@/components/Preloader"
 import { LanguageProvider } from "@/contexts/LanguageContext"
@@ -29,7 +29,10 @@ export default function RootLayout({
         <LanguageProvider>
           <Preloader />
           {children}
-          <Analytics />
+          {/* Google Analytics */}
+          {process.env.NEXT_PUBLIC_GA_ID && (
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+          )}
         </LanguageProvider>
       </body>
     </html>

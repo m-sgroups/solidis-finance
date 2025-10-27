@@ -1,14 +1,21 @@
 "use client"
 
 import { ArrowRight } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { useLanguage } from "@/contexts/LanguageContext"
 
 export default function Hero() {
   const { t } = useLanguage()
+  const router = useRouter()
 
   const handleScroll = (id: string) => {
     const element = document.getElementById(id)
     element?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  // Nouvelle fonction pour rediriger vers la page contact
+  const handleRedirectToContact = () => {
+    router.push("/contact")
   }
 
   return (
@@ -49,9 +56,9 @@ export default function Hero() {
             {t('hero.description')}
           </p>
 
-          {/* CTA Button with enhanced 3D effect */}
+          {/* CTA Button with enhanced 3D effect - MODIFIÉ pour rediriger vers /contact */}
           <button
-            onClick={() => handleScroll("simulation")}
+            onClick={handleRedirectToContact}
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-sapphire to-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:shadow-sapphire/50 hover:scale-105 group animate-in fade-in duration-1000 glow-sapphire"
             style={{ animationDelay: "400ms" }}
           >

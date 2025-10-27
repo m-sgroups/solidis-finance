@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { Calculator, ChevronDown, Download } from "lucide-react"
 import { useLanguage } from "@/contexts/LanguageContext"
 import jsPDF from "jspdf"
@@ -370,10 +371,14 @@ export default function Simulation() {
               </div>
             )}
 
-            {/* CTA */}
-            <button className="w-full mt-8 px-6 py-3 bg-gradient-to-r from-sapphire to-primary text-primary-foreground rounded-lg font-semibold hover:shadow-lg hover:shadow-sapphire/50 transition-all duration-200 hover:scale-105 active:scale-95 glow-sapphire">
+            {/* CTA : use Link directly as a styled button (no nested <button>) */}
+            <Link
+              href="/contact"
+              className="block w-full mt-8 px-6 py-3 bg-gradient-to-r from-sapphire to-primary text-primary-foreground rounded-lg font-semibold hover:shadow-lg hover:shadow-sapphire/50 transition-all duration-200 hover:scale-105 active:scale-95 glow-sapphire text-center"
+              role="button"
+            >
               {t('hero.cta')}
-            </button>
+            </Link>
           </div>
         </div>
       </div>

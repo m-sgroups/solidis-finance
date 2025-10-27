@@ -2,6 +2,7 @@
 
 import { Star } from "lucide-react"
 import { useLanguage } from "@/contexts/LanguageContext"
+import Link from "next/link"
 
 export default function Testimonials() {
   const { t } = useLanguage()
@@ -85,9 +86,14 @@ export default function Testimonials() {
 
         <div className="mt-16 text-center fade-in-up">
           <p className="text-lg text-muted-foreground mb-6">Unisciti a migliaia di clienti soddisfatti</p>
-          <button className="px-8 py-4 bg-gradient-to-r from-green-500 to-red-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/50 transition-all duration-300 hover:scale-105">
+
+          <Link
+            href="/contact"
+            className="inline-block px-8 py-4 bg-gradient-to-r from-green-500 to-red-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/50 transition-all duration-300 hover:scale-105"
+          >
             Inizia il Tuo Percorso
-          </button>
+          </Link>
+
         </div>
       </div>
     </section>

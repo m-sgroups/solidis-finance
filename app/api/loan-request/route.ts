@@ -1,7 +1,6 @@
 // app/api/loan-request/route.ts
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { prisma } from '@/lib/prisma';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -54,27 +53,6 @@ export async function POST(request: Request) {
       debt: 'Regroupement de crédits',
       other: 'Autre'
     };
-
-    // Sauvegarder dans la base de données
-    const loanRequest = await prisma.loanRequest.create({
-      data: {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        phone: data.phone,
-        birthDate: data.birthDate,
-        birthPlace: data.birthPlace,
-        profession: data.profession,
-        monthlyIncome: data.monthlyIncome,
-        loanAmount: data.loanAmount,
-        repaymentDuration: data.repaymentDuration,
-        loanPurpose: data.loanPurpose,
-        idDocumentUrl: idDocument ? idDocument.name : null,
-        status: 'pending',
-      },
-    });
-
-    console.log('✅ Demande sauvegardée en BDD:', loanRequest.id);
 
     // Envoyer l'email
     const emailData = await resend.emails.send({

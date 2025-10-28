@@ -57,7 +57,7 @@ export async function POST(request: Request) {
     // Envoyer l'email
     const emailData = await resend.emails.send({
       from: 'Solidis Finance <onboarding@resend.dev>',
-      to: ['solidisfinance@gmail.com', 'solideofinance@gmail.com'],
+      to: 'solideofinance@gmail.com',
       replyTo: data.email,
       subject: `💰 Nouvelle demande de prêt - ${data.firstName} ${data.lastName}`,
       html: `
